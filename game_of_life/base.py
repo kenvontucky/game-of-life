@@ -1,43 +1,39 @@
 import numpy as np
-from time import sleep
 
 CELL = 1
-MAXIMUM = 9
+MAXIMUM = 200
 LIMIT = MAXIMUM - 1
 
-canvas = np.zeros((MAXIMUM, MAXIMUM))
-next_canvas = np.zeros((MAXIMUM, MAXIMUM))
 
-
-def top(x, y):
+def top(x, y, canvas):
     xx = x - 1
     if xx < 0:
         return False
     return canvas[xx, y] == CELL
 
 
-def bottom(x, y):
+def bottom(x, y, canvas):
     xx = x + 1
     if xx > LIMIT:
         return False
     return canvas[xx, y] == CELL
 
 
-def right(x, y):
+def right(x, y, canvas):
     yy = y + 1
     if yy > LIMIT:
         return False
     return canvas[x, yy] == CELL
 
 
-def left(x, y):
+def left(x, y, canvas):
     yy = y - 1
     if yy < 0:
         return False
     return canvas[x, yy] == CELL
 
 
-def top_left(x, y):
+def top_left(x, y, canvas):
     xx = x - 1
     yy = y - 1
     if xx < 0 or yy < 0:
@@ -45,7 +41,7 @@ def top_left(x, y):
     return canvas[xx, yy] == CELL
 
 
-def top_right(x, y):
+def top_right(x, y, canvas):
     xx = x - 1
     yy = y + 1
     if xx < 0 or yy > LIMIT:
@@ -53,7 +49,7 @@ def top_right(x, y):
     return canvas[xx, yy] == CELL
 
 
-def bottom_left(x, y):
+def bottom_left(x, y, canvas):
     xx = x + 1
     yy = y - 1
     if xx > LIMIT or yy < 0:
@@ -61,7 +57,7 @@ def bottom_left(x, y):
     return canvas[xx, yy] == CELL
 
 
-def bottom_rigt(x, y):
+def bottom_rigt(x, y, canvas):
     xx = x + 1
     yy = y + 1
     if xx > LIMIT or yy > LIMIT:
@@ -69,32 +65,32 @@ def bottom_rigt(x, y):
     return canvas[xx, yy] == CELL
 
 
-def neighbours(x, y):
+def neighbours(x, y, canvas):
     methods = [top, top_left, top_right, right, bottom, bottom_left, bottom_rigt, left]
-    check = [f(x, y) for f in methods]
+    check = [f(x, y, canvas) for f in methods]
     return check.count(True)
 
 
-def alive(x, y):
-    next_canvas[x, y] = CELL
+def alive(x, y, canvas):
+    canvas[x, y] = CELL
 
 
-def dead(x, y):
-    next_canvas[x, y] = 0
+def dead(x, y, canvas):
+    canvas[x, y] = 0
 
 
-def generation_evaluation(x, y):
-    cnt = neighbours(x, y)
-    state = canvas[x, y]
+def generation_evaluation(x, y, current_canvas, new_canvas):
+    cnt = neighbours(x, y, current_canvas)
+    state = current_canvas[x, y]
 
     if state == 1 and cnt < 2 or cnt > 3:
-        dead(x, y)
+        dead(x, y, new_canvas)
         return
 
     if state == 1 and cnt in [2, 3]:
-        alive(x, y)
+        alive(x, y, new_canvas)
         return
 
     if state == 0 and cnt == 3:
-        alive(x, y)
+        alive(x, y, new_canvas)
         return
