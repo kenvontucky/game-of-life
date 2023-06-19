@@ -1,8 +1,4 @@
-import numpy as np
-
-CELL = 1
-MAXIMUM = 200
-LIMIT = MAXIMUM - 1
+from game_of_life.fixtures import CELL, LIMIT
 
 
 def top(x, y, canvas):
