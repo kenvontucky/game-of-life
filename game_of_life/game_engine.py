@@ -1,4 +1,4 @@
-from game_of_life.fixtures import CELL, LIMIT
+from fixtures import CELL, LIMIT
 
 
 def top(x, y, canvas):

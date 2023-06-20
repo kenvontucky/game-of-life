@@ -2,7 +2,7 @@ import random
 
 import pyxel
 
-from game_of_life.fixtures import FPS
+from fixtures import FPS
 
 
 class Background:
