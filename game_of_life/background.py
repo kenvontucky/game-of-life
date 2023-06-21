@@ -2,7 +2,7 @@ import random
 
 import pyxel
 
-from fixtures import FPS
+from game_of_life.fixtures import FPS
 
 
 class Background:
@@ -13,7 +13,11 @@ class Background:
         self.star_color_low = 13
         for i in range(self.starcount):
             self.star_list.append(
-                (random.random() * pyxel.width, random.random() * pyxel.height, random.random() * 1.5 + 1)
+                (
+                    random.random() * pyxel.width,
+                    random.random() * pyxel.height,
+                    random.random() * 1.5 + 1,
+                )
             )
 
     def update(self):
@@ -26,4 +30,6 @@ class Background:
 
     def draw(self):
         for x, y, speed in self.star_list:
-            pyxel.pset(x, y, self.star_color_high if speed > 1.8 else self.star_color_low)
+            pyxel.pset(
+                x, y, self.star_color_high if speed > 1.8 else self.star_color_low
+            )

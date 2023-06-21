@@ -6,7 +6,6 @@ authors = ["João Gomes <j.gomes@runtime-revolution.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-numpy = "^1.24.3"
 pyxel = "^1.9.16"
 
 [tool.poetry.dev-dependencies]

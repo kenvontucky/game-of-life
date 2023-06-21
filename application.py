@@ -1,8 +1,8 @@
 import pyxel
 
-from background import Background
-from game_engine import generation_evaluation
-from fixtures import CELL, FPS, MAXIMUM
+from game_of_life.background import Background
+from game_of_life.game_engine import generation_evaluation
+from game_of_life.fixtures import CELL, FPS, MAXIMUM
 
 
 class App:
